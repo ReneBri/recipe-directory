@@ -19,21 +19,36 @@ export default function Recipe() {
     const [isPending, setIsPending] = useState(true)
     const [error, setError] = useState(null)
 
+    // const handleClick = () => {
+    //   projectFirestore.collection('recipes').doc(id).update({
+    //     title: 'something completely different again again'
+    //   })
+    // }
+
     useEffect(() => {
-      projectFirestore.collection('recipes').doc(id).get()
-      .then((snapshot) => {
-        if(snapshot.empty){
+      const unsub = projectFirestore.collection('recipes').doc(id).onSnapshot((snapshot) => {
+        if(!snapshot.exists){
           setIsPending(false)
-          setError('No data to load')
+          setError('Could not find that recipe')
+        }else if(snapshot.empty){
+          setIsPending(false)
+          setError('Could not find this recipe')
+          setRecipe({})
         }else{
           setIsPending(false)
           setRecipe(snapshot.data())
         }
         console.log(snapshot)
-      }).catch(err => {
-        setError(err)
-        setIsPending(false)
       })
+
+      return () => unsub()
+
+    }, (err) => {
+      if(err){
+        setError(err.message)
+        setIsPending(false)
+      }
+
     }, [])
    
   return (
@@ -50,7 +65,7 @@ export default function Recipe() {
                     <li key={ing}>{ing}</li>
                   ))}
                 </ul>
-                <p className="method">{recipe.method}</p>
+                <p className="method">{recipe.method}</p> 
             </>)}
     </div>
   )

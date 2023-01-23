@@ -19,11 +19,11 @@ export default function Home() {
       
     setIsPending(true)
 
-    projectFirestore.collection('recipes').get()
-      .then((snapshot) => {
+    const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot) => {
         if (snapshot.empty) {
           setError('No recipes to load')
           setIsPending(false)
+          setRecipes([])
         }else{
           let results = []
           snapshot.docs.forEach((doc) => {
@@ -32,10 +32,13 @@ export default function Home() {
           setRecipes(results)
           setIsPending(false)
         }
-      }).catch(err => {
+      }, (err) => {
         setError(err.message)
         setIsPending(false)
       })
+
+      //We use this as a clean up function
+      return () => unsub()
 
   }, [])
 
