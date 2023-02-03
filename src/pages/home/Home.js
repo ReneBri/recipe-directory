@@ -16,7 +16,7 @@ export default function Home() {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState(null)
 
-  
+  // fetches recipe collection data upon load
   useEffect(() => {
       
     setIsPending(true)

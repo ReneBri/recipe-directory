@@ -11,6 +11,7 @@
     margin-top: 10px;
     font-size: 0.8em;
   }
+
   .create button {
     display: block;
     width: 100px;
@@ -24,10 +25,12 @@
     text-decoration: none;
     margin: 20px auto;
   }
+
   .ingredients {
     display: flex;
     align-items: center;
   }
+  
   .ingredients button {
     margin: 0 0 0 10px;
   }

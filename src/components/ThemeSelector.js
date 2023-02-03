@@ -1,9 +1,13 @@
+// hooks 
 import { useTheme } from '../hooks/useTheme'
 
+// styles and icons
 import modeIcon from '../assets/mode-icon.svg'
 import './ThemeSelector.css'
 
+// sets colors to pick the navbar from
 const themeColors = ['#58249c', '#249c6b', '#b70233']
+
 
 export default function ThemeSelector() {
 

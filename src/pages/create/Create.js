@@ -1,11 +1,15 @@
-import { useState, useRef, useEffect } from 'react'
+// hooks
+import { useState, useRef } from 'react'
 import { projectFirestore } from '../../firebase/config'
 import { useHistory } from 'react-router-dom'
 
 //Styles
 import './Create.css'
 
+
 export default function Create() {
+
+  // sets initial states for user inouts
   const [ title, setTitle ] = useState("")
   const [ method, setMethod ] = useState("")
   const [ cookingTime, setCookingTime ] = useState("")
@@ -14,10 +18,13 @@ export default function Create() {
   const ingredientInput = useRef(null) 
   const history = useHistory()
 
-
+  // handles the submit by creating a document with the user input and adding it
+  // to the firestore collection
   const handleSubmit = async (e) => {
+
     e.preventDefault()
     const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes'}
+
      //Post data & redirect user
     try {
       await projectFirestore.collection('recipes').add(doc)
@@ -28,14 +35,15 @@ export default function Create() {
   }
 
  
-
+  // handles adding a new ingredient to the list
   const handleAdd = (e) => { 
+
     //Prevents button from submitting
     e.preventDefault()
     //Makes a var out of the cleaned up New Ingredient
     const ing = newIngredient.trim()
 
-    //Checks if new var matches any already existing ingredients & if there even is a ingredient in the first place
+    //Checks if new var matches any already existing ingredients & if there even is an ingredient in the first place
     if(ing && !ingredients.includes(ing)){
       setIngredients((prevIngredients) => {
         return [...prevIngredients, ing]
@@ -47,7 +55,6 @@ export default function Create() {
     
   }
 
-  console.log(ingredients)
 
   return (
     <div className="create">

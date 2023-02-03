@@ -1,30 +1,29 @@
+// hooks
 import { useParams } from 'react-router-dom'
 import { useTheme } from '../../hooks/useTheme'
 import { useEffect, useState } from 'react'
 
+// config file
 import { projectFirestore } from '../../firebase/config'
 
 //Styles
 import './Recipe.css'
 
+
 export default function Recipe() {
 
   const { mode } = useTheme()
 
-    //Takes in params dynamically and sets to a url to fetch
+    // takes in params dynamically and sets to a url to fetch
     const queryParam = useParams()
     const { id } = queryParam
 
+    // sets initial fetching values
     const [recipe, setRecipe] = useState(null)
     const [isPending, setIsPending] = useState(true)
     const [error, setError] = useState(null)
 
-    // const handleClick = () => {
-    //   projectFirestore.collection('recipes').doc(id).update({
-    //     title: 'something completely different again again'
-    //   })
-    // }
-
+    // fetches the exact recipe
     useEffect(() => {
       const unsub = projectFirestore.collection('recipes').doc(id).onSnapshot((snapshot) => {
         if(!snapshot.exists){
@@ -40,7 +39,7 @@ export default function Recipe() {
         }
         console.log(snapshot)
       })
-
+      // clean up function
       return () => unsub()
 
     }, (err) => {
