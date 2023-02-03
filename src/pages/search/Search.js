@@ -2,7 +2,7 @@
 import './Search.css'
 
 //Hooks
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
 
 //Components
@@ -25,7 +25,7 @@ export default function Search() {
       {isPending && <p className="loading">Loading...</p>}
       {error && <p className="error">{error}</p>}
       {recipes && <RecipeList recipes={recipes}/>}
-      {recipes && recipes.length == 0 && <p className="error">No recipies matching this search. Sorry :(</p>}
+      {recipes && recipes.length === 0 && <p className="error">No recipies matching this search. Sorry :(</p>}
     </div>
   )
 }

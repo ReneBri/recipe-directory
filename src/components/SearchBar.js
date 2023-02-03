@@ -1,5 +1,8 @@
+// hooks
 import { useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+
+// styles
 import './SearchBar.css'
 
 export default function SearchBar() {

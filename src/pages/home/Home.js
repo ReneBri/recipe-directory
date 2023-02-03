@@ -44,7 +44,7 @@ export default function Home() {
 
   }, [])
 
-  console.log(recipes)
+  
   return (
     <div className="home">
         <div>Home</div>

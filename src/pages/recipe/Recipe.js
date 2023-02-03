@@ -37,7 +37,6 @@ export default function Recipe() {
           setIsPending(false)
           setRecipe(snapshot.data())
         }
-        console.log(snapshot)
       })
       // clean up function
       return () => unsub()

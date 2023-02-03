@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme'
-import SearchBar from './SearchBar'
 
 //Styles
 import './NavBar.css'
