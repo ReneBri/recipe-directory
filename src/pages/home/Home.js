@@ -1,20 +1,22 @@
+// config
 import { projectFirestore } from '../../firebase/config'
 import { useEffect, useState } from 'react'
 
 //Styles
 import './Home.css'
 
-//Compenents
+//Components
 import RecipeList from '../../components/RecipeList'
-
 
 
 export default function Home() {
 
+  // set initial statees for rendering
   const [recipes, setRecipes] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState(null)
 
+  
   useEffect(() => {
       
     setIsPending(true)
